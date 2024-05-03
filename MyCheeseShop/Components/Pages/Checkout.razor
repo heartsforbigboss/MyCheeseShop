@@ -2,13 +2,15 @@
 @using Microsoft.AspNetCore.Authorization
 @using System.ComponentModel.DataAnnotations
 @using MyCheeseShop.Context
+@using MyCheeseShop.Model
 @inject OrderProvider OrderProvider
 @attribute [Authorize]
-<h3>Checkout</h3>
 
-@* <EditForm EditContext="editContext" OnValidSubmit="MakePayment">
+@* <h3>Checkout</h3>
+
+<EditForm EditContext="editContext" OnValidSubmit="MakePayment">
     <DataAnnotationsValidator/>
-</EditForm> *@
+</EditForm>
 
 @code {
     private sealed class PaymentDetails
@@ -26,13 +28,11 @@
         public string SecurityCode { get; set; }
     }
 
-    // private async Task MakePayment()
-    // {
-    //     await SimulatePayment();
+    private async Task MakePayment()
+    {
+        await OrderProvider.CreateOrder(user, ShoppingCart.GetItems());
+        ShoppingCart.Clear();
+        NavigationManager.NavigateTo("/thank-you");
+    }
 
-    //     await OrderProvider.CreateOrder(user, ShoppingCart.GetItems());
-    //     ShoppingCart.Clear();
-    //     NavigationManager.NavigateTo("/thank-you");
-    // }
-
-}
+} *@

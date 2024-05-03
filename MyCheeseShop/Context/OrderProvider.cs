@@ -1,4 +1,5 @@
-﻿using MyCheeseShop.Model;
+﻿﻿using Microsoft.EntityFrameworkCore;
+using MyCheeseShop.Model;
 
 namespace MyCheeseShop.Context
 {
@@ -23,5 +24,7 @@ namespace MyCheeseShop.Context
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
         }
+
+        private readonly DatabaseContext _context;
     }
 }

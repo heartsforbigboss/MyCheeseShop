@@ -1,0 +1,8 @@
+﻿@* ﻿@page "/my-orders"
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
+@using MyCheeseShop.Context
+@inject OrderProvider OrderProvider
+@inject UserProvider UserProvider
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@attribute [Authorize] *@

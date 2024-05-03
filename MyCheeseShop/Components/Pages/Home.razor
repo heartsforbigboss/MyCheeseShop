@@ -1,12 +1,16 @@
 ﻿@using MyCheeseShop.Components.Account.Shared
+@using MyCheeseShop.Components.Shared
 @using MyCheeseShop.Context
 @using MyCheeseShop.Model
 @inject CheeseProvider CheeseProvider
 @inject NavigationManager NavigationManager
+@inject ShoppingCart ShoppingCart
 @page "/"
 
 <PageTitle>Home</PageTitle>
 <input type="text" class="form-control" placeholder="Search for cheese..." @bind="searchTerm" @bind:event="oninput" />
+
+<button type="button" class="btn btn-primary btn-sm" @onclick=GoToCart>Cart</button>
 
 @if (cheeses is null)
 {
@@ -16,14 +20,14 @@ else if (!cheeses.Any())
 {
     <p>No cheeses found.</p>
 }
-<div class="row">
+
     @foreach (var cheese in FilteredCheeses)
     {
         <div class="col">
-            <StoreItem Cheese="cheese" />
+            @* <StoreItem Cheese="cheese"/> *@
         </div>
     }
-</div>
+
 @if (!FilteredCheeses.Any())
 {
     <p>No cheeses found.</p>
