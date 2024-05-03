@@ -16,6 +16,8 @@ builder.Services.AddScoped<IdentityUserAccessor>();
 builder.Services.AddScoped<IdentityRedirectManager>();
 builder.Services.AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuthenticationStateProvider>();
 builder.Services.AddScoped<ShoppingCart>();
+builder.Services.AddScoped<CheeseProvider>();
+builder.Services.AddScoped<OrderProvider>();
 
 builder.Services.AddAuthentication(options =>
 {

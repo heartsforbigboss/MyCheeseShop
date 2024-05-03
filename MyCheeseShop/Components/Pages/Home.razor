@@ -1,6 +1,71 @@
-﻿@page "/"
+﻿@using MyCheeseShop.Components.Account.Shared
+@using MyCheeseShop.Context
+@using MyCheeseShop.Model
+@inject CheeseProvider CheeseProvider
+@inject NavigationManager NavigationManager
+@page "/"
 
 <PageTitle>Home</PageTitle>
+<input type="text" class="form-control" placeholder="Search for cheese..." @bind="searchTerm" @bind:event="oninput" />
 
-<h1>Hello, world!</h1>
+@if (cheeses is null)
+{
+    <p>Loading...</p>
+}
+else if (!cheeses.Any())
+{
+    <p>No cheeses found.</p>
+}
+<div class="row">
+    @foreach (var cheese in FilteredCheeses)
+    {
+        <div class="col">
+            <StoreItem Cheese="cheese" />
+        </div>
+    }
+</div>
+@if (!FilteredCheeses.Any())
+{
+    <p>No cheeses found.</p>
+}
 
+@code {
+    private IEnumerable<Cheese> cheeses;
+
+    protected override async Task OnInitializedAsync()
+    {
+        cheeses = await CheeseProvider.GetAllCheesesAsync();
+        filteredCheeses = cheeses;
+        // ShoppingCart.OnCartUpdated += StateHasChanged;
+    }
+
+    private IEnumerable<Cheese> filteredCheeses;
+    private IEnumerable<Cheese> FilteredCheeses
+    {
+        get
+        {
+            return filteredCheeses.Where(GetSearchCriteria);
+        }
+        set
+        {
+            filteredCheeses = value;
+        }
+    }
+
+    private string searchTerm = "";
+
+    private bool GetSearchCriteria(Cheese cheese)
+    {
+        if (string.IsNullOrWhiteSpace(searchTerm)) return true;
+
+        return cheese.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
+        || cheese.Type.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
+        || cheese.Description.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
+        || cheese.Strength.Contains(searchTerm, StringComparison.OrdinalIgnoreCase);
+    }
+
+    private void GoToCart()
+    {
+        NavigationManager.NavigateTo("/cart");
+    }
+}
