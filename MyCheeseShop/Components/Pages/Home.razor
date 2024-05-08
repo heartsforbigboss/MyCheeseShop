@@ -21,13 +21,14 @@ else if (!cheeses.Any())
     <p>No cheeses found.</p>
 }
 
+<div class="row">
     @foreach (var cheese in FilteredCheeses)
     {
         <div class="col">
-            @* <StoreItem Cheese="cheese"/> *@
+            <StoreItem Cheese="cheese" />
         </div>
     }
-
+</div>
 @if (!FilteredCheeses.Any())
 {
     <p>No cheeses found.</p>
@@ -40,7 +41,7 @@ else if (!cheeses.Any())
     {
         cheeses = await CheeseProvider.GetAllCheesesAsync();
         filteredCheeses = cheeses;
-        // ShoppingCart.OnCartUpdated += StateHasChanged;
+        ShoppingCart.OnCartUpdated += StateHasChanged;
     }
 
     private IEnumerable<Cheese> filteredCheeses;

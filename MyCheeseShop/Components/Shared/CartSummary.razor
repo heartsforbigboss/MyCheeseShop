@@ -37,22 +37,26 @@
         ShoppingCart.OnCartUpdated += async () => await CartUpdated();
     }
 
+    // Updates the cart when a new item is added to it
     private async Task CartUpdated()
     {
         StateHasChanged();
         await ProtectedSessionStore.SetAsync("cart", ShoppingCart.GetItems());
     }
 
+    // Removes an item from the cart
     private void RemoveItem(CartItem item)
     {
         ShoppingCart.RemoveItem(item.Cheese);
     }
-
+    
+    // Allows the user to increase the quantity of an item in the cart
     private void IncreaseQuantity(CartItem item)
     {
         ShoppingCart.AddItem(item.Cheese, 1);
     }
 
+    // Allows the user to decrease the quantity of am item in the cart
     private void DecreaseQuantity(CartItem item)
     {
         ShoppingCart.RemoveItem(item.Cheese, 1);

@@ -10,6 +10,7 @@
             _items = [];
         }
 
+        // Adds item to the cart 
         public void AddItem(Cheese cheese, int quantity)
         {
             var item = _items.FirstOrDefault(item => item.Cheese.Id == cheese.Id);
@@ -45,6 +46,7 @@
             OnCartUpdated?.Invoke();
         }
 
+        // Removes an item from the cart
         public void RemoveItem(Cheese cheese, int quantity)
         {
             var item = _items.FirstOrDefault(item => item.Cheese.Id == cheese.Id);
@@ -58,8 +60,9 @@
         }
         public void Clear()
         {
-            // remove all items from the cart
+            // Remove all items from the cart
             _items.Clear();
             OnCartUpdated?.Invoke();
         }
+    }
 }
