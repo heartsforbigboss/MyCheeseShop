@@ -12,6 +12,13 @@
             <th scope="col">Price</th>
             <th scope="col">Quantity</th>
             <th scope="col">Total</th>
+            <th scope="col">
+                <div class="row justify-content-center">
+                    <div class="col-auto">Actions</div>
+                </div>
+            </th>
+                            
+
         </tr>
     </thead>
     <tbody>
@@ -23,6 +30,19 @@
                 <td scope="col">@item.Cheese.Price.ToString("C")</td>
                 <td scope="col">@(item.Quantity * 100)g</td>
                 <td scope="col">@item.Total.ToString("C")</td>
+                <td scope="col">
+                        <div class="row justify-content-center">
+                            <div class="col-auto">
+                                <button class="btn btn-outline-success mt-1 mt-md-0" @onclick="() => IncreaseQuantity(item)">➕</button>
+                            </div>
+                            <div class="col-auto">
+                                <button class="btn btn-outline-primary mt-1 mt-md-0" @onclick="() => DecreaseQuantity(item)">➖</button>
+                            </div>
+                            <div class="col-auto">
+                                <button class="btn btn-outline-danger mt-1 mt-md-0" @onclick="() => RemoveItem(item)">🗑</button>
+                            </div>
+                        </div>
+                </td>
         </tr>
         }
     </tbody>
@@ -60,6 +80,11 @@
     private void DecreaseQuantity(CartItem item)
     {
         ShoppingCart.RemoveItem(item.Cheese, 1);
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        StateHasChanged();
     }
 
 }

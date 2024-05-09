@@ -8,9 +8,24 @@
 @page "/"
 
 <PageTitle>Home</PageTitle>
+
+
+<div class="card-body">
+        <div class="row">
+            <div class="col-md-10"/>
+            <div class="col-md-2">
+            <div class="d-grid gap-2">
+                <button class="btn btn-primary" type="button" @onclick=GoToCart>Cart</button>
+            </div></div>
+        </div>
+        
+</div>
+
+<div class="mb-3"/>
+
 <input type="text" class="form-control" placeholder="Search for cheese..." @bind="searchTerm" @bind:event="oninput" />
 
-<button type="button" class="btn btn-primary btn-sm" @onclick=GoToCart>Cart</button>
+<div class="mb-3" />
 
 @if (cheeses is null)
 {
