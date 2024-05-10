@@ -5,39 +5,35 @@
 
 <div class="card" style="width: 18rem;">
     <img src="/img/cheeses/@Cheese.ImageUrl" class="card-img-top" alt="@Cheese.Name">
-    <span class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-danger" style="font-size:20px">£@Cheese.Price</span>
+    <div class="d-grid gap-2">
+        <span class="position-absolute top-0 start-50 translate-middle badge bg-primary" style="font-size:20px">@Cheese.Name</span>
+    </div>
     <div class="card-body">
-        <h5 class="card-title">@Cheese.Name</h5>
-        <p class="card-text">@Cheese.Description</p>
+        <p style="text-align:center">
+            <span class="badge text-bg-secondary" style="font-size:20px">£@Cheese.Price per 100g</span>
+        </p>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="d-grid gap-2">
+                    <span class="badge text-light-emphasis bg-light-subtle border border-light-subtle rounded-2" style="text-align:center">Type: @Cheese.Type</span>
+                </div>
+            </div>
+            @* Changes the colour of the cheese strength display depending on the strength. *@
+            <div class="col-md-6">
+                <div class="d-grid gap-2">
+                    <span class="badge text-light-emphasis bg-light-subtle border border-light-subtle rounded-2" style="text-align:center">
+                        Strength: @Cheese.Strength
+                    </span>
+                </div>
+            </div>
+        </div>
     </div>
     <ul class="list-group list-group-flush">
-        <li class="list-group-item" style="text-align:center">
-            <div class="alert alert-secondary">
-                Type: @Cheese.Type
-            </div>
-        </li>
-        @* Changes the colour of the cheese strength display depending on the strength. *@
-        <li class="list-group-item" style="text-align:center">
-        @if (@Cheese.Strength == "Mild")
-        {
-            <div class="alert alert-success">
-                Strength: @Cheese.Strength
-            </div>
-        }
-        else if (@Cheese.Strength == "Medium")
-        {
-            <div class="alert alert-warning">
-                Strength: @Cheese.Strength
-            </div>
-        }
-        else
-        {
-            <div class="alert alert-danger">
-                Strength: @Cheese.Strength
-            </div>
-        }
-        </li>
+        <div style="padding:10px">
+        <p class="card-text"><i>@Cheese.Description</i></p>
+        </div>
     </ul>
+
     <div class="card-body">
         <div class="row">
             <div class="col-md-6">
@@ -56,7 +52,7 @@
         </div>
     </div>
 </div>
-<div class="mb-3" />
+<div class="mb-5" />
 
 
 @code {

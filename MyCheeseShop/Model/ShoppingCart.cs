@@ -64,5 +64,17 @@
             _items.Clear();
             OnCartUpdated?.Invoke();
         }
+        public int Count()
+        {
+            // return the number of items in the cart
+            return _items.Count;
+        }
+
+        public int GetQuantity(Cheese cheese)
+        {
+            // return the quantity of the cheese in the cart
+            var item = _items.FirstOrDefault(item => item.Cheese.Id == cheese.Id);
+            return item?.Quantity ?? 0;
+        }
     }
 }

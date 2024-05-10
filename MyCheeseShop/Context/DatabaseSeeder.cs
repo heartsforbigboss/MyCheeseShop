@@ -76,6 +76,8 @@ namespace MyCheeseShop.Context
                 new Cheese { Name = "Emmental Elegance", Type = "Semi-Hard", Description = "A Swiss cheese with a mild and nutty taste, featuring large irregular holes and a smooth, buttery texture, perfect for fondue or sandwiches.", Strength = "Medium", Price = 10.99m, ImageUrl="emmental.png" },
                 new Cheese { Name = "Pecorino Passion", Type = "Hard", Description = "An Italian cheese made from sheep's milk, boasting a sharp and salty flavor, often grated over pasta or enjoyed with honey and nuts.", Strength = "Strong", Price = 13.99m, ImageUrl="pecorino.png" },
                 new Cheese { Name = "Monterey Jack", Type = "Semi-Soft", Description = "A versatile American cheese with a mild and buttery taste, great for melting on nachos, sandwiches, or adding to omelets for extra creaminess.", Strength = "Medium", Price = 7.49m, ImageUrl="monterey.png" },
+                new Cheese { Name = "Unbelievably Unicorn", Type = "Magic", Description = "What a beautiful cheese! I sure wonder where it comes from.", Strength = "Medium", Price = 59.99m, ImageUrl="unicorn.png" },
+                new Cheese { Name = "ŠALTIBARŠČIAI", Type = "NE SURIS", Description = "TAI NĖ SURIS BĖT LABAI SKANI ŠALTIBARŠČIAI", Strength = "STIPRUS BLET", Price = 5.99m, ImageUrl="saltibarsciai.png" }
             ];
         }
 

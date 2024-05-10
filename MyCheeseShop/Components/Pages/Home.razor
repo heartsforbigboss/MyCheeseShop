@@ -12,10 +12,12 @@
 
 <div class="card-body">
         <div class="row">
-            <div class="col-md-10"/>
+            <div class="col-md-10">
+            <p style="font-size:30px">CHEESE OUT! CHEESE SHOP</p>
+            </div>
             <div class="col-md-2">
             <div class="d-grid gap-2">
-                <button class="btn btn-primary" type="button" @onclick=GoToCart>Cart</button>
+                <button class="btn btn-primary" type="button" @onclick=GoToCart>Cart (@ShoppingCart.Count())</button>
             </div></div>
         </div>
         
@@ -25,7 +27,7 @@
 
 <input type="text" class="form-control" placeholder="Search for cheese..." @bind="searchTerm" @bind:event="oninput" />
 
-<div class="mb-3" />
+<div class="mb-4" />
 
 @if (cheeses is null)
 {

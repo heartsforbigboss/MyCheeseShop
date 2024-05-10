@@ -4,15 +4,27 @@
 @using MyCheeseShop.Context
 @using MyCheeseShop.Model
 @inject OrderProvider OrderProvider
+@inject ShoppingCart ShoppingCart
+@inject NavigationManager NavigationManager
 @attribute [Authorize]
 
-@* <h3>Checkout</h3>
+<h3>Checkout</h3>
 
 <EditForm EditContext="editContext" OnValidSubmit="MakePayment">
     <DataAnnotationsValidator/>
 </EditForm>
 
 @code {
+    private User user;
+    private EditContext editContext;
+    private PaymentDetails paymentDetails;
+
+    protected override async Task OnInitializedAsync()
+    {
+        paymentDetails = new PaymentDetails();
+        editContext = new EditContext(paymentDetails);
+    }
+
     private sealed class PaymentDetails
     {
         [Required]
@@ -35,4 +47,5 @@
         NavigationManager.NavigateTo("/thank-you");
     }
 
-} *@
+
+}
