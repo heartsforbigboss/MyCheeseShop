@@ -48,6 +48,13 @@
     </tbody>
 </table>
 
+<div class="row">
+    <div class="col-md-9" />
+    <div class="col-md-3">
+        <span class="badge text-bg-warning" style="font-size:25px">Cart Total: £@ShoppingCart.Total()</span>
+    </div>
+</div>
+
 @code {
     [Parameter]
     public bool IsEditable { get; set; } = false;
