@@ -1,8 +1,10 @@
 ﻿@page "/cart"
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @using MyCheeseShop.Components.Shared
 @using MyCheeseShop.Model
 @inject ShoppingCart ShoppingCart
 @inject NavigationManager NavigationManager
+@inject ProtectedSessionStorage ProtectedSessionStore
 
 <h3>Cart</h3>
 
@@ -10,6 +12,7 @@
 {
     <p style="text-align:center; font-size:30px">Cart is empty :( have this gorgeous photo of Windows95Man instead</p>
     <img src="/img/windows.jpg" />
+    @* <p style="text-align:center; font-size:30px">Cart is empty :(</p> *@
 }
 else
 {

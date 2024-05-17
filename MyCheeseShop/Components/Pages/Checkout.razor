@@ -1,17 +1,71 @@
 ﻿@page "/checkout"
 @using Microsoft.AspNetCore.Authorization
 @using System.ComponentModel.DataAnnotations
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@using MyCheeseShop.Components.Shared
 @using MyCheeseShop.Context
 @using MyCheeseShop.Model
 @inject OrderProvider OrderProvider
 @inject ShoppingCart ShoppingCart
 @inject NavigationManager NavigationManager
+@inject ProtectedSessionStorage ProtectedSessionStore
 @attribute [Authorize]
 
-<h3>Checkout</h3>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card-body bg-light" style="padding: 5px">
+            <h2 class="card-title">Order Summary</h2>
+            <div class="mb-3" />
+            @foreach (var item in ShoppingCart.GetItems())
+            {
+                <div class="card-body bg-light" style="padding:10px">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card" style="height: 100px; width: 100px">
+                                <img src="/img/cheeses/@item.Cheese.ImageUrl" class="card-img-top img-fluid" alt="@item.Cheese.Name" style="height: 100px; width: 100px; object-fit: cover;">
+                                <div class="d-grid gap-2">
+                                    <span class="position-absolute top-0 start-100 translate-middle badge bg-warning" style="font-size:15px">@(item.Quantity * 100)g</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <p>@item.Cheese.Name </p>
+                        </div>
+                        <div class="col-md-4">
+                            <p>£@item.Total</p>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="mb-3" />
+            <div class="d-grid gap-2" style="padding:5px">
+            <span class="badge text-bg-warning" style="font-size:25px;text-align:center">Cart Total: £@ShoppingCart.Total()</span>
+            <div class="mb-1" />
+            <div class="row">
+                <div class="col-md-6">
+                        <div class="d-grid gap-2">
+                        <a href="/" class="btn btn-outline-warning">Back to Cheeses</a>
+                        </div>
+                </div>
+                <div class="col-md-6">
+                        <div class="d-grid gap-2x">
+                        <a href="/cart" class="btn btn-outline-warning">Back to Cart</a>
+                        </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card-body bg-light" style="padding: 5px">
+            <h2 class="card-title">Customer</h2>
+    </div>
+</div>
+</div>
+
 
 <EditForm EditContext="editContext" OnValidSubmit="MakePayment">
-    <DataAnnotationsValidator/>
+    <DataAnnotationsValidator />
 </EditForm>
 
 @code {
@@ -23,6 +77,14 @@
     {
         paymentDetails = new PaymentDetails();
         editContext = new EditContext(paymentDetails);
+        ShoppingCart.OnCartUpdated += async () => await CartUpdated();
+    }
+
+    // Updates the cart when a new item is added to it
+    private async Task CartUpdated()
+    {
+        StateHasChanged();
+        await ProtectedSessionStore.SetAsync("cart", ShoppingCart.GetItems());
     }
 
     private sealed class PaymentDetails

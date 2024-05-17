@@ -39,7 +39,7 @@
                                 <button class="btn btn-outline-primary mt-1 mt-md-0" @onclick="() => DecreaseQuantity(item)">➖</button>
                             </div>
                             <div class="col-auto">
-                                <button class="btn btn-outline-danger mt-1 mt-md-0" @onclick="() => RemoveItem(item)">🗑</button>
+                                <button class="btn btn-outline-danger mt-1 mt-md-0" @onclick="() => RemoveItem(item)">🗑️</button>
                             </div>
                         </div>
                 </td>
@@ -49,9 +49,12 @@
 </table>
 
 <div class="row">
-    <div class="col-md-9" />
     <div class="col-md-3">
-        <span class="badge text-bg-warning" style="font-size:25px">Cart Total: £@ShoppingCart.Total()</span>
+        <button class="btn btn-outline-danger mt-1 mt-md-0" style="font-size:20px" @onclick="() => ShoppingCart.Clear()">Empty Cart</button> @* Empty cart in just one click! *@
+    </div>
+    <div class="col-md-6" />
+    <div class="col-md-3">
+        <span class="badge text-bg-warning" style="font-size:25px">Cart Total: £@ShoppingCart.Total()</span> @* Total price of all the cheeses in the cart. *@
     </div>
 </div>
 
