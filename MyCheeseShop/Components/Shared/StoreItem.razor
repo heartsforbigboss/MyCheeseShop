@@ -3,33 +3,36 @@
 @inject ProtectedSessionStorage ProtectedSessionStore
 @inject ShoppingCart ShoppingCart
 
-<div class="card" style="width: 18rem;">
+<div class="card h-100" style="background:aliceblue">
+    <span class="position-absolute top-0 start-50 translate-middle bg-primary w-100" style="font-size:20px; padding:5px; color:aliceblue; text-align: center"><b>@Cheese.Name</b></span>
+    <div class="mb-3" />
     <img src="/img/cheeses/@Cheese.ImageUrl" class="card-img-top" alt="@Cheese.Name">
     <div class="d-grid gap-2">
-        <span class="position-absolute top-0 start-50 translate-middle badge bg-primary" style="font-size:20px">@Cheese.Name</span>
     </div>
     <div class="card-body">
         <p style="text-align:center">
-            <span class="badge text-bg-secondary" style="font-size:20px">£@Cheese.Price per 100g</span>
+            <div class="d-grid gap-2">
+            <span class="badge text-primary-emphasis bg-primary-subtle border border-primary-subtle w-100" style="font-size:20px"><b>£@Cheese.Price</b> per 100g</span>
+            </div>
         </p>
         <div class="row">
             <div class="col-md-6">
                 <div class="d-grid gap-2">
-                    <span class="badge text-light-emphasis bg-light-subtle border border-light-subtle rounded-2" style="text-align:center">Type: @Cheese.Type</span>
+                    <span class="badge text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-2" style="text-align:center">Type: @Cheese.Type</span>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="d-grid gap-2">
-                    <span class="badge text-light-emphasis bg-light-subtle border border-light-subtle rounded-2" style="text-align:center">
+                    <span class="badge text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-2" style="text-align:center">
                         Strength: @Cheese.Strength
                     </span>
                 </div>
             </div>
         </div>
     </div>
-    <ul class="list-group list-group-flush">
+    <ul class="list-group list-group-flush h-100">
         <div style="padding:10px">
-        <p class="card-text"><i>@Cheese.Description</i></p>
+            <p class="card-text text-primary-emphasis"><i>@Cheese.Description</i></p>
         </div>
     </ul>
 
@@ -37,7 +40,7 @@
         <div class="row">
             <div class="col-md-6">
                 <h3>
-                    <InputSelect class="form-select w-100" @bind-Value="quantity" required>
+                    <InputSelect class="form-select w-100 text-primary-emphasis bg-primary-subtle" @bind-Value="quantity" required>
                         @for (var i = 1; i <= 5; i++)
                         {
                             <option value="@i">@(i * 100)g</option>
@@ -46,13 +49,18 @@
                 </h3>
             </div>
             <div class="col-md-6">
-                <h3><button class="btn btn-primary" @onclick="AddToCart">Add to Cart</button></h3>
+                <h3><button class="btn btn-primary position-relative w-100" @onclick="AddToCart">Add to Cart
+                @if (ShoppingCart.GetQuantity(Cheese) > 0)
+                {
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size:15px">
+                        x @ShoppingCart.GetQuantity(Cheese)
+                        <span class="visually-hidden">@Cheese.Name in shopping cart</span>
+                    </span>
+                }</button></h3>
             </div>
         </div>
     </div>
 </div>
-<div class="mb-5" />
-
 
 @code {
 
